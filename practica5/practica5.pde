@@ -32,7 +32,7 @@ fin=false;
 eclipse=false;
 chidori= new jutsu(1);
 rasengan= new jutsu(0);
-//valle = loadImage("valle.jpg");
+valle = loadImage("valle2.png");
 rio = loadImage("agua.jpg");
 roja = loadImage("luna2.jpg");
 sangre = loadImage("luna3.png");
@@ -49,18 +49,15 @@ sangre = loadImage("luna3.png");
 void draw(){
     
   if(t)secuenciaFinal();
-  //valle.resize(width,height);
-  background(0);
-  //pushMatrix();
+  valle.resize(width,height);
+  background(valle);
   translate(x,y,z);
-  //popMatrix();
   if(activa1)chidori.drawJutsu();
   if(activa2)rasengan.drawJutsu();
   dibujar();
   if(t==false)actualizaCamara();
   if(rasengan.fin())if(chidori.fin())fin=true;
   mostrarMenu();
- println(x+"  "+y+"  "+z+"  ");
  if(rasengan.esFinal() && chidori.esFinal()){
    
  x=0;
@@ -185,7 +182,6 @@ void mostrarMenu(){
   if(t==false){
   textSize(40);
      text("Pulsa 'Enter' para poner modo eclipse",20,40);
-     println("aaaa:     "+fin);
   if(fin==false){
   
      if(!activa2){
