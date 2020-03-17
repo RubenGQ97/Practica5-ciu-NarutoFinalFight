@@ -1,5 +1,5 @@
 
-
+  import ddf.minim.*;
 
 jutsu chidori;
 jutsu rasengan;
@@ -8,9 +8,20 @@ PImage rio,roja,valle,sangre;
 PShape luna;
 float x,y,z;
 boolean eclipse,avanzar,retroceder,derecha,izquierda,subir,bajar,fin,instrucciones,activa1,activa2,t;
-
+  Minim sonido;
+  AudioSample sound;
+  AudioSample sound2;
+  AudioSample sound3;
+  AudioSample sound4;
+  
 void setup(){
 size(800,800,P3D);
+sonido = new Minim(this);
+sound= sonido.loadSample("rasengan.mp3",1024);
+  sound2= sonido.loadSample("chidori.mp3",1024);
+  sound3= sonido.loadSample("jutsu.mp3",1024);
+  sound4= sonido.loadSample("best.mp3",120);
+  
 x=0;
 y=0;
 z=-0;
@@ -30,6 +41,7 @@ sangre = loadImage("luna3.png");
     luna.setTexture(roja);
     luna.setStroke(255);
       endShape();
+      sound4.trigger();
 }
 
 
@@ -59,6 +71,8 @@ activa1=false;
 activa2=false;
 fin=false;
 eclipse=false;
+chidori= new jutsu(1);
+rasengan= new jutsu(0);
  
  }
   
@@ -70,8 +84,14 @@ eclipse=false;
 
 
 void keyPressed(){
-  if(key == 'a' && activa2|| key == 'A' && activa2) rasengan.aumenta();
-  if(key == 'l' && activa1 || key == 'L' && activa1) chidori.aumenta();
+  if(key == 'a' && activa2|| key == 'A' && activa2) {
+  rasengan.aumenta();
+  sound3.trigger();
+  }
+  if(key == 'l' && activa1 || key == 'L' && activa1){
+  chidori.aumenta();
+  sound3.trigger();
+  } 
   if(keyCode == ENTER) eclipse=!eclipse;
   if(key == 'w' && fin|| key == 'W' && fin) avanzar=true;
   if(key == 's' && fin|| key == 'S' && fin) retroceder=true;
@@ -80,8 +100,14 @@ void keyPressed(){
   if(keyCode == DOWN && fin) bajar=true;
   if(keyCode == RIGHT && fin) derecha=true;
   if(keyCode == LEFT && fin) izquierda=true;
-  if(key == 'r'|| key == 'R') activa2=true;
-  if(key == 'c'|| key == 'C') activa1=true;
+  if(key == 'r'|| key == 'R') {
+  sound.trigger();
+  activa2=true;
+  }
+  if(key == 'c'|| key == 'C') {
+    sound2.trigger();
+    activa1=true;
+  }
 }
 
 void keyReleased(){
